@@ -1,3 +1,5 @@
+$error: #B72020;
+
 .container-header {
   max-width: 1440px;
   margin: auto;
@@ -52,6 +54,14 @@
 
 .date-picker {
   clear: both;
+}
+
+.error-message {
+  font-size: 13px;
+  color: $error;
+  div {
+    padding: 10px 0;
+  }
 }
 
 @media (max-width: 600px) {
