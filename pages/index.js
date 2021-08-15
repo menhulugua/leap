@@ -144,7 +144,7 @@ export default function Home() {
       return false;
     if (number.length !== 10)
       return false;
-    if (parseInt(postcode) != postcode)
+    if (parseInt(number) != number)
       return false;
     return true;
   }
@@ -294,12 +294,12 @@ export default function Home() {
                 <input name="phone" ref={phoneRef} defaultValue={userDetail.phone} onBlur={() => checkError(phoneRef)} type="text" />
                 <div ref={phoneErrorRef} className={styles['error-message']}></div>
               </div>
-              <div className={styles['form-item']}>
+              <div className={`${styles['form-item']} ${styles.postcode}`}>
                 <label>Postcode</label>
                 <input name="postcode" ref={postcodeRef} defaultValue={userDetail.postcode} onBlur={() => checkError(postcodeRef)} type="text" />
                 <div ref={postcodeErrorRef} className={styles['error-message']}></div>
               </div>
-              <div className={styles['form-item']}>
+              <div className={`${styles['form-item']} ${styles.state}`}>
                 <label>State</label>
                 <select name="state" ref={stateRef} defaultValue={userDetail.state}>
                   {states.map(state => (
