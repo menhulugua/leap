@@ -6,7 +6,7 @@ import { useState, useRef } from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 
 const Edit = 'Edit';
 const Save = 'Save';
@@ -240,7 +240,7 @@ export default function Home() {
       </Head>
       <header>
         <div className={styles['container-header']}>
-          <h1>{buttonText === Save && <FontAwesomeIcon onClick={discardEdit} icon={faChevronLeft}></FontAwesomeIcon>}My Account</h1>
+          <h1>{buttonText === Save && <span><FontAwesomeIcon onClick={discardEdit} icon={faChevronLeft}></FontAwesomeIcon></span>}My Account</h1>
           <div>
             <button onClick={handleEdit}>{buttonText}</button>
           </div>    
@@ -257,7 +257,7 @@ export default function Home() {
               <button>View Resume</button>
             </div>
             <div>
-              <button onClick={handleUpload}>Upload Resume</button>
+              <button className={styles.upload} onClick={handleUpload}>Upload Resume</button>
             </div>
           </div>
           <form className={styles['user-info']}>
@@ -294,23 +294,29 @@ export default function Home() {
                     <option key={state} defaultValue={state}>{state}</option>
                   ))}
                 </select>
+                <div className={styles['error-message']}></div>
               </div>
               <div className={styles['form-item']}>
                 <label>Company Name</label>
                 <input name="company" ref={companyRef} defaultValue={userDetail.company} type="text" />
+                <div className={styles['error-message']}></div>
               </div>
               <div className={styles['form-item']}>
                 <label>ABN</label>
                 <input name="abn" ref={abnRef} defaultValue={userDetail.abn} type="text" />
+                <div className={styles['error-message']}></div>
               </div>
               <div className={styles['form-item']}>
                 <label>Hourly Rate</label>
-                <input name="rate" ref={rateRef} defaultValue={userDetail.rate}  onBlur={() => checkError(rateRef)} type="text" />
+                <FontAwesomeIcon className={styles['dollar-sign']} icon={faDollarSign}></FontAwesomeIcon>
+                <div className={styles.line}></div>
+                <input className={styles.rate} name="rate" ref={rateRef} defaultValue={userDetail.rate}  onBlur={() => checkError(rateRef)} type="text" />
                 <div ref={rateErrorRef} className={styles['error-message']}></div>
               </div>
               <div className={styles['form-item']}>
                 <label>Date of Birth</label>
                 <DatePicker selected={birthday} className={styles['date-picker']} onChange={(date) => setBirthday(date)} />
+                <div className={styles['error-message']}></div>
               </div>
             </fieldset>
           </form>
