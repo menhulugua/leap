@@ -26,25 +26,32 @@
 }
 
 .user-info {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 40px 0;
-  border-top: 1px solid #aaa;
-  .form-item {
-    flex: 50%;
-    label {
-      display: block;
-    }
-    input, select {
-      width: 100%;
-    }
-    &:nth-of-type(2n) {
-      padding-left: 15px;
-    }
-    &:nth-of-type(2n + 1) {
-      padding-right: 15px;
+  fieldset {
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px 0;
+    border-top: 1px solid #aaa;
+    .form-item {
+      flex: 50%;
+      label {
+        display: block;
+      }
+      input, select {
+        width: 100%;
+      }
+      &:nth-of-type(2n) {
+        padding-left: 15px;
+      }
+      &:nth-of-type(2n + 1) {
+        padding-right: 15px;
+      }
     }
   }
+}
+
+.date-picker {
+  clear: both;
 }
 
 @media (max-width: 600px) {

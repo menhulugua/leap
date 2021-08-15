@@ -2,7 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
 import avatarPic from '../public/bruce-banner.jpeg'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Edit = 'Edit';
 const Save = 'Save';
@@ -21,9 +23,27 @@ export default function Home() {
       company: 'Marvel',
       abn: '12123123123',
       rate: '379',
-      dob: '21-may-1970'
+      dob: new Date('5-21-1970')
     }
   );
+
+  const setStartDate = (date) => {
+    console.log(date);
+  }
+
+  const checkError = (ref) => {
+    console.log(ref.current.name);
+  }
+
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const phoneRef = useRef(null);
+  const postcodeRef = useRef(null);
+  const stateRef = useRef(null);
+  const companyRef = useRef(null);
+  const abnRef = useRef(null);
+  const rateRef = useRef(null);
 
   return (
     <div>
@@ -55,60 +75,62 @@ export default function Home() {
             </div>
           </div>
           <form className={styles['user-info']}>
-            <div className={styles['form-item']}>
-              <label>First Name</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>Last Name</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>Email</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>Phone Number</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>Postcode</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>State</label>
-              <select>
-                {states.map(state => (
-                  <option key={state} value={state}>{state}</option>
-                ))}
-              </select>
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>Company Name</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>ABN</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>Hourly Rate</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
-            <div className={styles['form-item']}>
-              <label>Date of Birth</label>
-              <input type="text" />
-              <div className={styles['error-message']}></div>
-            </div>
+            <fieldset disabled={buttonText !== Edit}>
+              <div className={styles['form-item']}>
+                <label>First Name</label>
+                <input name="firstName" ref={firstNameRef} defaultValue={userDetail.firstName} onBlur={() => checkError(firstNameRef)} type="text" />
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>Last Name</label>
+                <input name="lastName" ref={lastNameRef} defaultValue={userDetail.lastName} onBlur={() => checkError(lastNameRef)} type="text" />
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>Email</label>
+                <input name="email" ref={emailRef} defaultValue={userDetail.email} onBlur={() => checkError(emailRef)} type="email" />
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>Phone Number</label>
+                <input name="phone" ref={phoneRef} defaultValue={userDetail.phone} onBlur={() => checkError(phoneRef)} type="text" />
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>Postcode</label>
+                <input name="postcode" ref={postcodeRef} defaultValue={userDetail.postcode} onBlur={() => checkError(postcodeRef)} type="text" />
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>State</label>
+                <select name="state" ref={stateRef} defaultValue={userDetail.state}>
+                  {states.map(state => (
+                    <option key={state} defaultValue={state}>{state}</option>
+                  ))}
+                </select>
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>Company Name</label>
+                <input name="company" ref={companyRef} defaultValue={userDetail.company} type="text" />
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>ABN</label>
+                <input name="abn" ref={abnRef} defaultValue={userDetail.abn} type="text" />
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>Hourly Rate</label>
+                <input name="rate" ref={rateRef} defaultValue={userDetail.rate}  onBlur={() => checkError(rateRef)} type="text" />
+                <div className={styles['error-message']}></div>
+              </div>
+              <div className={styles['form-item']}>
+                <label>Date of Birth</label>
+                <DatePicker selected={userDetail.dob} className={styles['date-picker']} onChange={(date) => setStartDate(date)} />
+                <div className={styles['error-message']}></div>
+              </div>
+            </fieldset>
           </form>
         </div>
       </main>
