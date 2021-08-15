@@ -132,6 +132,15 @@ $formText: #12263F;
   background-color: #ddd;
 }
 
+.hidden-upload {
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
 @media (max-width: 680px) {
   .user-info {
     fieldset {

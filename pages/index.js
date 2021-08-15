@@ -29,6 +29,7 @@ export default function Home() {
   const [birthday, setBirthday] = useState(new Date(defaultDetail.dob));
   const [userDetail, setUserDetail] = useState(defaultDetail);
   const [hasError, setHasError] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
 
   const checkError = (ref) => {
     let value = ref.current.value;
@@ -181,8 +182,18 @@ export default function Home() {
     )
   }
 
-  const handleUpload = () => {
+  const handleUpload = (event) => {
+    setSelectedFile(event.target.files[0]);
+  }
 
+  const uploadRef = useRef(null);
+
+  const clickUpload = () => {
+    uploadRef.current.click();
+  }
+
+  const viewResume = () => {
+    alert(`Some file viewer to view ${selectedFile.name}`);
   }
 
   const discardEdit = () => {
@@ -254,10 +265,11 @@ export default function Home() {
             </div>          
             <div className={styles['user-name']}>
               <h2>{userDetail.firstName} {userDetail.lastName}</h2>
-              <button>View Resume</button>
+              <button onClick={viewResume}>View Resume</button>
             </div>
             <div>
-              <button className={styles.upload} onClick={handleUpload}>Upload Resume</button>
+              <button className={styles.upload} onClick={clickUpload}>Upload Resume</button>
+              <input ref={uploadRef} className={styles['hidden-upload']} type="file" name="file" onChange={handleUpload} />
             </div>
           </div>
           <form className={styles['user-info']}>
